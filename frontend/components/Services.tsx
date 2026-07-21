@@ -18,31 +18,31 @@ const services = [
     icon: ShieldCheck,
     title: 'Private Security Services',
     desc: 'Trained male & female security personnel for corporate, residential, and industrial protection.',
-    img: 'https://images.pexels.com/photos/2579874/pexels-photo-2579874.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Private_Security.jpeg',
   },
   {
     icon: Sparkles,
     title: 'Housekeeping, Cleaning & Hospitality',
     desc: 'Professional cleaning, housekeeping, and hospitality staff for offices, hotels, and institutions.',
-    img: 'https://images.pexels.com/photos/4239035/pexels-photo-4239035.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Housekeeping.jpeg',
   },
   {
     icon: Camera,
     title: 'Event Organization & Photography',
     desc: 'Complete event planning, management, photography & videography services for all occasions.',
-    img: 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Event_Organization.jpeg',
   },
   {
     icon: GraduationCap,
     title: 'Health, Education & AI Training',
     desc: 'Specialized training programs in health, education, digital marketing, and AI applications.',
-    img: 'https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Health_Education.jpeg',
   },
   {
     icon: HeartHandshake,
     title: 'Women Empowerment Programs',
     desc: 'Awareness programs and initiatives dedicated to women empowerment and social development.',
-    img: 'https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Women_Empowerment.jpeg',
   },
   {
     icon: BriefcaseBusiness,
@@ -54,25 +54,25 @@ const services = [
     icon: Drama,
     title: 'Cultural Programs (Drama & Dance)',
     desc: 'Organizing cultural events, drama performances, and dance programs to celebrate heritage.',
-    img: 'https://images.pexels.com/photos/2167673/pexels-photo-2167673.jpeg?auto=extract&cs=tinysrgb&w=800',
+    img: 'Cultural_Programs.jpeg',
   },
   {
     icon: Plane,
     title: 'Tour & Travel Services',
     desc: 'Domestic and international tour packages, ticketing, and complete travel assistance.',
-    img: 'https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Tour_Travel.jpeg',
   },
   {
     icon: PackageCheck,
     title: 'Government & Private Tender Supplies',
     desc: 'Safety equipment, stationery, sports items, furniture, food & clothing supplies.',
-    img: 'https://images.pexels.com/photos/4488636/pexels-photo-4488636.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Government_Private.jpeg',
   },
   {
     icon: Truck,
     title: 'Courier & Cargo Services',
     desc: 'Reliable domestic and international courier & cargo delivery solutions.',
-    img: 'https://images.pexels.com/photos/4368132/pexels-photo-4368132.jpeg?auto=compress&cs=tinysrgb&w=800',
+    img: 'Courier_Cargo.jpeg',
   },
 ];
 
@@ -96,13 +96,17 @@ export default function Services() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s) => (
-            <article key={s.title} className="service-card group bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="relative h-40 -mx-5 -mt-5 mb-4 overflow-hidden rounded-t-2xl">
+            <article
+              key={s.title}
+              className="service-card group bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
+            >
+              {/* 4:3 landscape aspect ratio image container */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={s.img}
                   alt={s.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b3e]/60 to-transparent"></div>
@@ -110,10 +114,14 @@ export default function Services() {
                   <s.icon className="text-white" size={20} />
                 </div>
               </div>
-              <h3 className="font-bold text-[#0d1b3e] mb-2 group-hover:text-amber-600 transition-colors text-base">
-                {s.title}
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">{s.desc}</p>
+
+              {/* Text content */}
+              <div className="p-5">
+                <h3 className="font-bold text-[#0d1b3e] mb-2 group-hover:text-amber-600 transition-colors text-base">
+                  {s.title}
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{s.desc}</p>
+              </div>
             </article>
           ))}
         </div>

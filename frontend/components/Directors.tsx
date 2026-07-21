@@ -1,27 +1,71 @@
 'use client';
 
+import { useState } from 'react';
+import Image from 'next/image';
 import { Phone, Mail } from 'lucide-react';
 
 const directors = [
   {
-    name: 'Kaleem Ullah Rizvi',
+    name: 'KALIM ULLAH RIZV',
     phone: '9752128838',
     role: 'Director',
     initials: 'KR',
+    img: '/KALIM_RIZV.jpeg',
   },
   {
-    name: 'Shabana Kaleem Rizvi',
+    name: 'SHABANA KALIM RIZVI',
     phone: '8109929029',
     role: 'Director',
     initials: 'SR',
+    img: '/SHABANA_RIZVI.jpeg',
   },
   {
-    name: 'Ahad Ullah',
+    name: 'AHAD ULLAH',
     phone: '7971293277',
     role: 'Director',
     initials: 'AU',
+    img: '/AHAD_ULLAH.jpeg',
   },
 ];
+
+function DirectorCard({ d }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 text-center group">
+      {/* Director photo — standard circular profile shape */}
+      <div className="relative w-28 h-28 mx-auto mb-5">
+        {!imgError && d.img ? (
+          <Image
+            src={d.img}
+            alt={d.name}
+            fill
+            sizes="112px"
+            onError={() => setImgError(true)}
+            className="rounded-full object-cover object-top shadow-lg ring-4 ring-amber-100 group-hover:ring-amber-300 group-hover:scale-105 transition-all duration-300"
+          />
+        ) : (
+          /* fallback: initials if photo fails to load */
+          <div className="w-28 h-28 rounded-full gradient-gold flex items-center justify-center text-white font-extrabold text-2xl shadow-lg ring-4 ring-amber-100">
+            {d.initials}
+          </div>
+        )}
+        <div className="absolute bottom-0 right-0 w-7 h-7 bg-[#0d1b3e] rounded-full border-4 border-white flex items-center justify-center">
+          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+        </div>
+      </div>
+
+      <h3 className="font-bold text-lg text-[#0d1b3e] mb-1">{d.name}</h3>
+      <p className="text-amber-600 text-sm font-semibold mb-4">{d.role}</p>
+      <a
+        href={`tel:+91${d.phone}`}
+        className="inline-flex items-center gap-2 text-gray-700 hover:text-amber-600 transition-colors text-sm font-medium"
+      >
+        <Phone size={15} /> {d.phone}
+      </a>
+    </div>
+  );
+}
 
 export default function Directors() {
   return (
@@ -42,27 +86,7 @@ export default function Directors() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {directors.map((d) => (
-            <div
-              key={d.name}
-              className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 text-center group"
-            >
-              <div className="relative w-24 h-24 mx-auto mb-5">
-                <div className="w-24 h-24 rounded-full gradient-gold flex items-center justify-center text-white font-extrabold text-2xl shadow-lg group-hover:scale-105 transition-transform">
-                  {d.initials}
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#0d1b3e] rounded-full border-4 border-white flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-              </div>
-              <h3 className="font-bold text-lg text-[#0d1b3e] mb-1">{d.name}</h3>
-              <p className="text-amber-600 text-sm font-semibold mb-4">{d.role}</p>
-              <a
-                href={`tel:${d.phone}`}
-                className="inline-flex items-center gap-2 text-gray-700 hover:text-amber-600 transition-colors text-sm font-medium"
-              >
-                <Phone size={15} /> {d.phone}
-              </a>
-            </div>
+            <DirectorCard key={d.name} d={d} />
           ))}
         </div>
 
@@ -81,4 +105,3 @@ export default function Directors() {
     </section>
   );
 }
-

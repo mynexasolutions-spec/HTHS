@@ -12,5 +12,8 @@
     "typecheck:frontend": "npm --prefix frontend run typecheck",
     "typecheck:backend": "npm --prefix backend run typecheck",
     "build:all": "npm --prefix backend run build && npm --prefix frontend run build"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }
